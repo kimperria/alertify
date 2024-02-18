@@ -1,0 +1,30 @@
+default_language_version:
+  python: python3.12.1
+
+repos:
+- repo: https://github.com/psf/black
+  rev: 24.2.0
+  hooks:
+  - id: black
+    language_version: python3.12.1
+    args: ['--line-length', '79', '--include', '\.pyi?$', '--exclude', '/(\.git|\ .hg|\.mypy_cache|\.tox|\.venv|_build|buck-out|build)/']
+
+- repo: https://github.com/timothycrosley/isort
+  rev: 5.13.2
+  hooks:
+  - id: isort
+    name: isort (python)
+    args: ["--profile", "black", "--force-grid-wrap=2"]
+
+- repo: https://github.com/PyCQA/flake8
+  rev: 7.0.0
+  hooks:
+  - id: flake8
+
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.5.0
+  hooks:
+  - id: check-merge-conflict
+  - id: check-yaml
+  - id: debug-statements
+  - id: trailing-whitespace
