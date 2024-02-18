@@ -82,6 +82,7 @@ This project is designed, developed and maintained by: [Kimani John](https://git
 
 ###### Additional information
 **Database schema:** [Alertify ERD](https://drawsql.app/teams/kimperria/diagrams/alertify)
+**Design thinking documentation:** [Alertify Doc](https://docs.google.com/document/d/17FB-QKJXXq3Fy0yJytv8TI-dh8XjTAF0DK77nG4AdLo/edit?usp=sharing)
 
 ### Developer guidlines
 ##### To contribute to this repo
