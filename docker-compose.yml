@@ -1,0 +1,19 @@
+version: '3'
+services:
+  alertify:
+    restart: always
+    build: ./
+    env_file:
+      - ./.env
+    environment:
+      DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@alertify-db/${DB_NAME}
+    command: python manaage.py runserver 0.0.0.0:3016
+    alertify-db:
+      restart: always
+      image: postgres:latest
+      volumes:
+        - postgres_data:/var/lib/postgres/data/
+      environment:
+        - POSTGRES_USER=${DB_USER}
+        - POSTGRES_PASSWORD=${DB_PASSWORD}
+        - POSTGRES_DB=${DB_NAME}
