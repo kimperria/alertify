@@ -7,7 +7,11 @@ services:
       - ./.env
     environment:
       DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@alertify-db/${DB_NAME}
-    command: python manaage.py runserver 0.0.0.0:3016
+    command: python manaage.py runserver 0.0.0.0:8001
+    ports:
+      - 8001:8000
+    depends_on:
+      - alert-db
     alertify-db:
       restart: always
       image: postgres:latest
@@ -17,5 +21,3 @@ services:
         - POSTGRES_USER=${DB_USER}
         - POSTGRES_PASSWORD=${DB_PASSWORD}
         - POSTGRES_DB=${DB_NAME}
-    ports:
-      - 8001:8000
