@@ -24,4 +24,5 @@ from django.urls import (
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/app/", include("app.urls")),
+    path("api-auth/", include("rest_framework.urls")),
 ]
