@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "app.apps.AppConfig",
     "app.customers",
+    "app.orders",
     "drf_yasg",
     "rest_framework",
     "oauth2_provider",

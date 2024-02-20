@@ -39,6 +39,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/customer/", include("app.customers.urls")),
+    path("api/v1/order/", include("app.orders.urls")),
     re_path(r"^auth/", include("drf_social_oauth2.urls", namespace="drf")),
     # Swagger urls
     path(
