@@ -24,6 +24,7 @@ class Customer(TimeStampedModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     customer_name = models.CharField(max_length=100)
     customer_code = models.CharField(max_length=6, unique=True)
+    phone_number = models.CharField(max_length=13, unique=True)
 
     def save(self, *args, **kwargs):
         # Generate  unique customer code before saving
