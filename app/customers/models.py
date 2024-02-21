@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 from app.abstract import TimeStampedModel
@@ -20,6 +21,7 @@ def generate_unique_customer_code():
 
 
 class Customer(TimeStampedModel):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     customer_name = models.CharField(max_length=100)
     customer_code = models.CharField(max_length=6, unique=True)
 
@@ -30,4 +32,5 @@ class Customer(TimeStampedModel):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.customer_code}  {self.customer_name}"
+        # return f"{self.customer_code}  {self.customer_name}"
+        return self.user.username
