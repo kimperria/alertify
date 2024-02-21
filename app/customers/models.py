@@ -30,4 +30,4 @@ class Customer(TimeStampedModel):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.customer_code + self.customer_name
+        return f"{self.customer_code}  {self.customer_name}"
