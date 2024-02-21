@@ -1,4 +1,5 @@
 from rest_framework import (
+    permissions,
     status,
     viewsets,
 )
@@ -11,6 +12,7 @@ from app.orders.serializers import OrderSerializer
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
