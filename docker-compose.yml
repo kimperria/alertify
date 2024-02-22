@@ -11,7 +11,7 @@ services:
     ports:
       - 8001:8000
     depends_on:
-      - alert-db
+      - alertify-db
     alertify-db:
       restart: always
       image: postgres:latest
