@@ -15,6 +15,9 @@ flake8 = "*"
 pre-commit = "*"
 drf-social-oauth2 = "*"
 drf-yasg = "==1.21.4"
+whitenoise = "*"
+gunicorn = "*"
+uvicorn = "*"
 
 [dev-packages]
 
