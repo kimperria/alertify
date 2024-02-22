@@ -43,7 +43,7 @@ urlpatterns = [
     re_path(r"^auth/", include("drf_social_oauth2.urls", namespace="drf")),
     # Swagger urls
     path(
-        "docs/swagger/",
+        "",
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
