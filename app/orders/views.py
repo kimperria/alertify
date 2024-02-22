@@ -49,8 +49,13 @@ class OrderViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except TwilioException as e:
             print(f"Failed to send SMS: {e}")
+            body = {
+                "status": e.status,
+                "message": e.msg,
+                "Error-Message": "Twilio failed to send Order confirmation SMS",
+            }
             return Response(
-                data="Failed to Order confirmation SMS",
+                data=body,
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
