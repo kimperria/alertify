@@ -16,6 +16,9 @@ pre-commit = "*"
 drf-social-oauth2 = "*"
 drf-yasg = "==1.21.4"
 twilio = "*"
+whitenoise = "*"
+gunicorn = "*"
+uvicorn = "*"
 
 [dev-packages]
 
