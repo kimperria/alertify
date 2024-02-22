@@ -7,17 +7,22 @@ services:
       - ./.env
     environment:
       DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@alertify-db/${DB_NAME}
-    command: python manaage.py runserver 0.0.0.0:8001
+      DEBUG: 1
+      SECRET_KEY: ${SECRET_KEY}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+    command: python manaage.py runserver 0.0.0.0:8000
     ports:
       - 8001:8000
     depends_on:
-      - alert-db
-    alertify-db:
-      restart: always
-      image: postgres:latest
-      volumes:
-        - postgres_data:/var/lib/postgres/data/
-      environment:
-        - POSTGRES_USER=${DB_USER}
-        - POSTGRES_PASSWORD=${DB_PASSWORD}
-        - POSTGRES_DB=${DB_NAME}
+      - alertify-db
+  alertify-db:
+    restart: always
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgres/data/
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+volumes:
+  postgres_data:
