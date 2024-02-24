@@ -1,3 +1,4 @@
+import ast
 import logging
 from pathlib import Path
 
@@ -15,11 +16,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG")
 
 MODE = config("DJANGO_ENV")
 
-ALLOWED_HOSTS = []
+# Convert env list to python list
+ALLOWED_HOSTS = ast.literal_eval(config("ALLOWED_HOSTS"))
 
 
 # Application definition
