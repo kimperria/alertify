@@ -19,7 +19,7 @@ echo "DJANGO_SUPERUSER_PASSWORD: $DJANGO_SUPERUSER_PASSWORD"
 
 # Create superuser
 echo "Creating superuser"
-if [[ $CREATE_SUPERUSER ]]; then
+if [ "$CREATE_SUPERUSER" = "True" ]; then
     python manage.py shell <<EOF
 from django.contrib.auth.models import User
 
