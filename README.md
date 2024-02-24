@@ -2,6 +2,30 @@
 ---
 This is a simple backend service project to manage customer orders.
 
+### How it works
+Authentication via OAuth2
+1. Create user on Google OAuth2 playground
+2. Under step one (select and authorize API):
+    - Choose Google OAuth2 API V2
+    -   Define the scopes below
+        - https://www.googleapis.com/auth/userinfo.email
+        - https://www.googleapis.com/auth/userinfo.profile
+        - OpenID
+    - Click authorize API
+3. You will have to login with a gmail account
+4. Sign in to Google OAuth 2.0 playground
+5. On login, an Authorization code will be provided
+    -
+    ![Google 0Auth2](./assets/blur_auth.png)
+6. Click on the blue Exchange authorization code for the tokens button. This will generate a google generated access token that will then be needed to be converted by DRF in order to create the authorization and authentication Bearer token needed for this app.
+    - Conversion happens on this URL
+    ![Conversion URL](./assets/covert_tokens.png)
+    - On a successful response, the string value on the key access token grants you this service DRF access token.
+
+7. Create a customer instance
+8. Create an order instance NB Africa’s Talking API sandbox was out at the time of this release.
+    - Twilio only sends messages to verified account thereby with the current implementation you won't receive an order confirmation SMS
+
 ### Requirements
 ---
 - Python3 *(version 3.12.1)*

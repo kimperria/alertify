@@ -13,6 +13,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    http_method_names = ["get", "put", "patch", "post"]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

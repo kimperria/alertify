@@ -15,14 +15,12 @@ services:
       - 8001:8000
     depends_on:
       - alertify-db
-  alertify-db:
-    restart: always
-    image: postgres:latest
-    volumes:
-      - postgres_data:/var/lib/postgres/data/
-    environment:
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_NAME}
-volumes:
-  postgres_data:
+    alertify-db:
+      restart: always
+      image: postgres:latest
+      volumes:
+        - postgres_data:/var/lib/postgres/data/
+      environment:
+        - POSTGRES_USER=${DB_USER}
+        - POSTGRES_PASSWORD=${DB_PASSWORD}
+        - POSTGRES_DB=${DB_NAME}

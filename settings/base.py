@@ -79,6 +79,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "alertify.urls"
@@ -162,3 +163,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 if DEBUG:
     logging.basicConfig(level=logging.DEBUG)
+
+if not DEBUG:
+    STATICFILES_STORAGE = (
+        "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    )
