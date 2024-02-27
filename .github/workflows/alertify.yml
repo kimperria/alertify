@@ -1,0 +1,59 @@
+name: ALERTIFY API
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    pull_request:
+      branches:
+        - "*"
+jobs:
+  run-tests:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    services:
+      database:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: ${{ secrets.DB_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          POSTGRES_DB: github_actions
+          DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@database/github_actions
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.12.1
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.12.1
+
+    - name: pycopg2 prerequisites
+      run: |
+          sudo apt-get install python3-dev libpq-dev
+    - name: Install pipenv
+      run: |
+          python -m pip install --upgrade pipenv wheel
+    - id: cache-pipenv
+      uses: actions/cache@v1
+      with:
+        path: ~/.local/share/virtualenvs
+        key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+    - name: Install dependacies
+      if: step.cache-pipenv.outputs.cache-hit != 'true'
+      run: |
+          pipenv install --deploy --dev
+    - name: Lint with black
+      env:
+        PIPENV_NOSPIN: "true"
+        WORKON_HOME: ~/.pipenv/virtualenvs
+        PYTHONPATH: "."
+      run: |
+        pipenv install black=23.2.1
+        pipenv run black --check --verbose
+
+      working-directory: ${{ github.workspace }}

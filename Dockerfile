@@ -4,7 +4,9 @@ FROM python:3.12.1
 WORKDIR /alertify
 
 ## Set env vars
+# prevent python from writing .pyc files
 ENV PYTHONDONTWRITEBYTECODE 1
+# ensure python output is sent directly to the terminal without buffering
 ENV PYTHONBUFFERED 1
 
 ## install deps
@@ -20,4 +22,7 @@ RUN pip install pipenv
 RUN python3 -m pipenv install --system
 
 # copy project
+COPY entrypoint.sh /entrypoint.sh
 COPY . .
+
+ENTRYPOINT ["/entrypoint.sh"]
