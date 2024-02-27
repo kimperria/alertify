@@ -4,7 +4,7 @@ This is a simple backend service project to manage customer orders.
 
 ### How it works
 Authentication via OAuth2
-1. Create user on Google OAuth2 playground
+1. Create user on [Google OAuth2 playground](https://developers.google.com/oauthplayground/)
 2. Under step one (select and authorize API):
     - Choose Google OAuth2 API V2
     -   Define the scopes below
@@ -64,14 +64,21 @@ pipenv install
 ##### Enviroment variables
 ```
 SECRET_KEY='django-secret-key' or 'you-will-never-guess'
-MODE='dev' // default for development
+DJANGO_ENV='dev' // default for development
 DEBUG=True
-DEV_DB_NAME='blackpanther22'
-DEV_DB_USER='postgres user' or 'allowed psql user'
-DEV_DB_PASSWORD='you-will-never-guess' or Null
-DEV_DB_HOST=provide default
-ALLOWED_HOSTS=provide for localhost
+DATABASE_URL=postgres://{{DATABASE_USER}}:{{DATABASE_PASSWORD}}@localhost:5432/{{ DATABASE_NAME}}'
+DB_NAME='blackpanther22'
+DB_USER='postgres user' or 'allowed psql user'
+DB_PASSWORD='you-will-never-guess'
+ALLOWED_HOSTS=provide for localhost (Should be a list)
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY='some value from your OAuth config'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET='some value from your OAuth config'
+TWILIO_ACCOUNT_SID='some value from Twilio config'
+TWILIO_AUTH_TOKEN='some value from Twilio config'
+TWILLIO_PHONE_NUMBER='some value from Twilio config'
 ```
+
+Update the value of ENV var according to your local setup
 
 8. Migrations
 
