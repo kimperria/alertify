@@ -22,7 +22,7 @@ RUN pip install pipenv
 RUN python3 -m pipenv install --system
 
 # copy project
-COPY ./entrypoint.sh /alertify/entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 COPY . .
 
-ENTRYPOINT ["/alertify/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]

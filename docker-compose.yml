@@ -1,28 +1,44 @@
-version: '3'
+version: '3.8'
 services:
-  alertify:
-    restart: always
-    build: ./
+  backend:
+    container_name: alertify-django-app
+    build:
+      context: ./
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app/
+    ports:
+      - 8001:8000
     env_file:
       - ./.env
     environment:
-      DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@alertify-db/${DB_NAME}
-      DEBUG: 1
-      SECRET_KEY: ${SECRET_KEY}
-      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
-    command: python manage.py runserver 0.0.0.0:8000
-    ports:
-      - 8001:8000
-    depends_on:
-      - alertify-db
-  alertify-db:
-    restart: always
-    image: postgres:latest
-    environment:
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_NAME}
-    volumes:
-      - postgres_data:/var/lib/postgres/data/
+      - DEBUG=${DEBUG}
+      - SECRET_KEY=${SECRET_KEY}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+  # alertify:
+  #   restart: always
+  #   build: ./
+  #   env_file:
+  #     - ./.env
+  #   environment:
+  #     DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@alertify-db/${DB_NAME}
+  #     DEBUG: 1
+  #     SECRET_KEY: ${SECRET_KEY}
+  #     ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+  #   command: python manage.py runserver 0.0.0.0:8000
+  #   ports:
+  #     - 8001:8000
+    # depends_on:
+    #   - alertify-db
+  # alertify-db:
+  #   restart: always
+  #   image: postgres:latest
+  #   environment:
+  #     - POSTGRES_USER=${DB_USER}
+  #     - POSTGRES_PASSWORD=${DB_PASSWORD}
+  #     - POSTGRES_DB=${DB_NAME}
+  #   volumes:
+  #     - postgres_data:/var/lib/postgres/data/
+    # healthcheck:
 volumes:
   postgres_data:
